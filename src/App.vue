@@ -1,17 +1,55 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <sidebar-menu @toggle-collapse="onToggleCollapse" :menu="menu" width="190px"/>
+    <div :style="{marginLeft: sidebarWidth + 'px', transition: 'margin-left 350ms'}">
+      <router-view :key="$route.path"/>
+    </div> 
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import { SidebarMenu } from "vue-sidebar-menu"
+import 'vue-sidebar-menu/dist/vue-sidebar-menu.css'
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    SidebarMenu
+  },
+  data() {
+    return {
+      menu: [
+        {
+          header: true,
+          title: "Main Navigation",
+          hiddenOnCollapse: true
+        },
+        {
+          href: {path: "/"},
+          title: 'Home',
+          icon: 'fas fa-home'
+        },
+        {
+          href: {path: "/weather"},
+          title: 'Weather',
+          icon: 'fas fa-align-right'
+        },
+        {
+          href: {path: "/profile"},
+          title: 'Profile',
+          icon: 'fas fa-user'
+        }
+      ],
+      sidebarWidth: 190
+    }
+  },
+  methods: {
+    onToggleCollapse(collapse){
+      if(collapse)
+        this.sidebarWidth = 50
+      else
+        this.sidebarWidth = 190
+    }
   }
 }
 </script>
@@ -23,6 +61,22 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+  display: flex;
+  flex-direction: row;
 }
+#nav {
+  background-color: #42b983;
+}
+
+
+.v-sidebar-menu .vsm--link.vsm--link_active {
+  color: #42b983;
+  text-decoration: underline;
+  background-color: rgba(256, 256, 256, 0.15);
+}
+
+#content {
+  /* margin-left: 190px; */
+}
+
 </style>
