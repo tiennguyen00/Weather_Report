@@ -1,7 +1,8 @@
 <template>
   <div id="app">
+    <Loading/>
     <sidebar-menu @toggle-collapse="onToggleCollapse" :menu="menu" width="190px"/>
-    <div :style="{marginLeft: sidebarWidth + 'px', transition: 'margin-left 350ms'}">
+    <div :style="{marginLeft: sidebarWidth + 'px', transition: 'margin-left 350ms', width: '100%'}">
       <router-view :key="$route.path"/>
     </div> 
   </div>
@@ -10,11 +11,13 @@
 <script>
 import { SidebarMenu } from "vue-sidebar-menu"
 import 'vue-sidebar-menu/dist/vue-sidebar-menu.css'
+import Loading from "./components/utils/Loading.vue"
 
 export default {
   name: 'App',
   components: {
-    SidebarMenu
+    SidebarMenu,
+    Loading
   },
   data() {
     return {
@@ -55,6 +58,9 @@ export default {
 </script>
 
 <style>
+body {
+  margin: 0;
+}
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;

@@ -27,7 +27,11 @@ const getWeather = async (nameCity) => {
       (tempMax = res.data.main.temp_max),
       (cloudNess = res.data.clouds.all);
     for (var i of res.data.weather) {
-      weather_description.push({ weather: i.main, description: i.description });
+      weather_description.push({
+        weather: i.main,
+        description: i.description,
+        id: i.id,
+      });
     }
   });
 
@@ -35,6 +39,7 @@ const getWeather = async (nameCity) => {
   await getForecastWeather(longtitude, latitude)
     .then((res) => {
       weather_forecast = res;
+      console.log("Result: ", weather_forecast);
     })
     .catch((err) => console.log("Somethings wrong: ", err));
 
