@@ -18,22 +18,27 @@ const getWeather = async (nameCity) => {
     "&units=metric&appid=" +
     apiWeatherKey;
   // Get detail
-  await axios.get(apiString).then((res) => {
-    (latitude = res.data.coord.lat),
-      (longtitude = res.data.coord.lon),
-      (temperature = res.data.main.temp),
-      (airPressure = res.data.main.pressure),
-      (tempMin = res.data.main.temp_min),
-      (tempMax = res.data.main.temp_max),
-      (cloudNess = res.data.clouds.all);
-    for (var i of res.data.weather) {
-      weather_description.push({
-        weather: i.main,
-        description: i.description,
-        id: i.id,
-      });
-    }
-  });
+  await axios
+    .get(apiString)
+    .then((res) => {
+      (latitude = res.data.coord.lat),
+        (longtitude = res.data.coord.lon),
+        (temperature = res.data.main.temp),
+        (airPressure = res.data.main.pressure),
+        (tempMin = res.data.main.temp_min),
+        (tempMax = res.data.main.temp_max),
+        (cloudNess = res.data.clouds.all);
+      for (var i of res.data.weather) {
+        weather_description.push({
+          weather: i.main,
+          description: i.description,
+          id: i.id,
+        });
+      }
+    })
+    .catch((err) =>
+      console.log("Somethings wrong with Openweathermap api: ", err)
+    );
 
   // Get forecast weather
   await getForecastWeather(longtitude, latitude)

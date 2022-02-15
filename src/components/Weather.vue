@@ -10,7 +10,7 @@
         <input :class="{disable: $v.$invalid}" @click="handleSubmit" type="submit" value="Get Weather"/>
       </div>
     </form>
-    <div v-show="getCurrentState.nameCity != ''" class="displayResult">
+    <div v-show="getCurrentState.temperature" class="displayResult">
       <div id="mainWeather">
         <Pin 
           :nameCity="getCurrentState.nameCity" 
