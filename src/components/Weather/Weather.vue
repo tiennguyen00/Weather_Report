@@ -3,9 +3,12 @@
     <form @submit.prevent="handleSubmit">
       <div class="inputbox">
         <input v-model="$v.nameCity.$model" type="text" required="required"/>
-        <!-- <div class="error" v-if="!$v.nameCity.minLength">A name city must have at least {{ $v.nameCity.$params.minLength.min }} letters.</div> -->
         <span>Enter a name city</span>
       </div>
+      <transition name="fade">
+        <div class="error" v-if="!$v.nameCity.minLength">A name city must have at least {{ $v.nameCity.$params.minLength.min }} letters.</div>
+      </transition>
+
       <div class="inputbox">
         <input :class="{disable: $v.$invalid}" @click="handleSubmit" type="submit" value="Get Weather"/>
       </div>
@@ -21,10 +24,10 @@
           :tempMax="getCurrentState.tempMax" 
           :tempMin="getCurrentState.tempMin" 
           :cloudNess="getCurrentState.cloudNess"
-          :weather_description="getCurrentState.weather_description" style="margin-top: 35px"/>
+          :weatherDescription="getCurrentState.weatherDescription" style="margin-top: 35px"/>
       </div>
       <div id="forecastWeather">
-        <div v-for="item in getCurrentState.weather_forecast.slice(0,8)" :key="item.index">
+        <div v-for="item in getCurrentState.weatherForecast.slice(0,8)" :key="item.index">
           <Pin2 :timeDT="item.dt" :temperature="item.temp"/>
         </div>
       </div>
@@ -34,8 +37,8 @@
 <script>
 import { required, minLength } from "vuelidate/lib/validators"
 import { mapGetters, mapActions } from "vuex";
-import Pin from "./utils/Pin.vue"
-import Pin2 from "./utils/Pin2.vue"
+import Pin from "../utils/Pin.vue"
+import Pin2 from "../utils/Pin2.vue"
 export default {
   name: "Weather",
   data() {
@@ -77,7 +80,6 @@ export default {
   position: relative;
   width: 300px;
   height: 50px;
-  margin-bottom: 20px;
 }
 .inputbox input {
   position: absolute;
@@ -118,6 +120,9 @@ export default {
 .error {
   color: red;
   font-size: 12px;
+  text-align: left;
+  margin: 10px;
+  transition: opacity 1s ease;
 }
 .disable{
   background-color: #ddd !important;
@@ -135,6 +140,15 @@ export default {
 }
 #mainWeather {
   /* flex-grow: 1 */
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.8s;
+}
+.fade-enter,
+.fade-leave-to {
+  opacity: 0;
 }
 
 

@@ -9,8 +9,8 @@ const getWeather = async (nameCity) => {
     tempMax,
     tempMin,
     cloudNess,
-    weather_description = [],
-    weather_forecast = [];
+    weatherDescription = [],
+    weatherForecast = [];
 
   const apiString =
     "https://api.openweathermap.org/data/2.5/weather?q=" +
@@ -29,10 +29,11 @@ const getWeather = async (nameCity) => {
         (tempMax = res.data.main.temp_max),
         (cloudNess = res.data.clouds.all);
       for (var i of res.data.weather) {
-        weather_description.push({
+        weatherDescription.push({
           weather: i.main,
           description: i.description,
           id: i.id,
+          icon: i.icon,
         });
       }
     })
@@ -43,8 +44,8 @@ const getWeather = async (nameCity) => {
   // Get forecast weather
   await getForecastWeather(longtitude, latitude)
     .then((res) => {
-      weather_forecast = res;
-      console.log("Result: ", weather_forecast);
+      weatherForecast = res;
+      console.log("Result: ", weatherForecast);
     })
     .catch((err) => console.log("Somethings wrong: ", err));
 
@@ -57,8 +58,8 @@ const getWeather = async (nameCity) => {
     tempMax,
     tempMin,
     cloudNess,
-    weather_description,
-    weather_forecast,
+    weatherDescription,
+    weatherForecast,
   };
 };
 

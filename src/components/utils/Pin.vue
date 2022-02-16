@@ -2,14 +2,18 @@
   <div class="wrapper">
   <div class="widget-container">
     <div class="top-left">
-      <h1 class="city" id="city">{{nameCity}}</h1>
+      <h1 class="city">{{nameCity}} 
+      </h1>
       <!-- <h2 id="day">Day</h2> -->
       <h3 id="date"><i class="fas fa-solid fa-calendar-day"></i> {{currentDate}}</h3>
       <h3 id="time"><i class="fas fa-solid fa-clock"></i> {{currentTime}}</h3>
       <p class="geo"><i class="fas fa-solid fa-map"></i> {{longtitude}}&deg;N, {{latitude}}&deg;E</p>
     </div>
-    <div class="top-right" v-for="item in weather_description" :key="item.index">
-      <h1 id="weather-status">{{item.weather}} / {{item.description}}</h1>
+
+    <div class="top-right" v-for="item in weatherDescription" :key="item.index">
+      <h1 id="weather-status">{{item.weather}} / {{item.description}} 
+        <img style="background-color: gray; height: 20px; transform: translateY(3px);" :src="'http://openweathermap.org/img/wn/' + item.icon + '.png'" alt="image icon"/>
+      </h1>
       <div v-show="String(item.id)[0] == '2'" class="icon thunder-storm">
         <div class="cloud"></div>
         <div class="lightning">
@@ -17,6 +21,7 @@
           <div class="bolt"></div>
         </div>
       </div>
+      
 
       <div v-show="String(item.id)[0] == '3'" class="icon sun-shower">
         <div class="cloud"></div>
@@ -49,13 +54,6 @@
         <div class="cloud"></div>
         <div class="cloud"></div>
       </div>
-
- 
-
-
-
-      
-
     </div>
   
     <div class="horizontal-half-divider"></div>
@@ -88,15 +86,15 @@ export default {
   name: "Pin",
   props: {
     nameCity: String,
-    latitude: String,
-    longtitude: String,
-    airPressure: String,
-    temperature: String,
-    tempMax: String,
-    tempMin: String,
-    cloudNess: String,
-    weather_description: Array,
-    weather_forecast: Array
+    latitude: Number,
+    longtitude: Number,
+    airPressure: Number,
+    temperature: Number,
+    tempMax: Number,
+    tempMin: Number,
+    cloudNess: Number,
+    weatherDescription: Array,
+    weatherForecast: Array
   },
   data() {
     return {
