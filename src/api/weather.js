@@ -9,6 +9,7 @@ const getWeather = async (nameCity) => {
     tempMax,
     tempMin,
     cloudNess,
+    timeZone,
     weatherDescription = [],
     weatherForecast = [];
 
@@ -27,6 +28,7 @@ const getWeather = async (nameCity) => {
         (airPressure = res.data.main.pressure),
         (tempMin = res.data.main.temp_min),
         (tempMax = res.data.main.temp_max),
+        (timeZone = res.data.timezone),
         (cloudNess = res.data.clouds.all);
       for (var i of res.data.weather) {
         weatherDescription.push({
@@ -58,6 +60,7 @@ const getWeather = async (nameCity) => {
     tempMax,
     tempMin,
     cloudNess,
+    timeZone,
     weatherDescription,
     weatherForecast,
   };

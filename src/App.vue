@@ -5,6 +5,7 @@
     <div :style="{marginLeft: sidebarWidth + 'px', transition: 'margin-left 350ms', width: '100%'}">
       <router-view :key="$route.path"/>
     </div> 
+    <LanguageSwitcher/>
   </div>
 </template>
 
@@ -12,39 +13,45 @@
 import { SidebarMenu } from "vue-sidebar-menu"
 import 'vue-sidebar-menu/dist/vue-sidebar-menu.css'
 import Loading from "./components/utils/Loading.vue"
+import LanguageSwitcher from "./components/utils/LanguageSwitcher.vue"
+import i18n from "./i18n"
 
 export default {
   name: 'App',
   components: {
     SidebarMenu,
-    Loading
+    Loading,
+    LanguageSwitcher
   },
   data() {
     return {
       menu: [
         {
           header: true,
-          title: "Main Navigation",
+          title: i18n.t('nav.Title'),
           hiddenOnCollapse: true
         },
         {
           href: {path: "/"},
-          title: 'Home',
+          title: i18n.t('nav.Home'),
           icon: 'fas fa-home'
         },
         {
           href: {path: "/weather"},
-          title: 'Weather',
+          title: i18n.t('nav.Weather'),
           icon: 'fas fa-align-right'
         },
         {
           href: {path: "/profile"},
-          title: 'Profile',
+          title: i18n.t('nav.Profile'),
           icon: 'fas fa-user'
         }
       ],
       sidebarWidth: 190
     }
+  },
+  created() {
+
   },
   methods: {
     onToggleCollapse(collapse){

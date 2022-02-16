@@ -11,6 +11,7 @@ const state = {
     tempMax: 0,
     tempMin: 0,
     cloudNess: 0,
+    timeZone: 0,
     weatherDescription: [],
     weatherForecast: [],
   },

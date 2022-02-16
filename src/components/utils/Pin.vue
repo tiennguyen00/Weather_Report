@@ -2,11 +2,11 @@
   <div class="wrapper">
   <div class="widget-container">
     <div class="top-left">
-      <h1 class="city">{{nameCity}} 
+      <h1 class="city">{{nameCity}}  (<i class="fas fa-solid fa-clock"/> {{caculateTimeZone}})
       </h1>
       <!-- <h2 id="day">Day</h2> -->
-      <h3 id="date"><i class="fas fa-solid fa-calendar-day"></i> {{currentDate}}</h3>
-      <h3 id="time"><i class="fas fa-solid fa-clock"></i> {{currentTime}}</h3>
+      <h3 id="date"><i class="fas fa-solid fa-calendar-day"></i> {{getCurrentDate}}</h3>
+      <h3 id="time"><i class="fas fa-solid fa-clock"></i> {{getTimeZone}}</h3>
       <p class="geo"><i class="fas fa-solid fa-map"></i> {{longtitude}}&deg;N, {{latitude}}&deg;E</p>
     </div>
 
@@ -64,15 +64,15 @@
     <div class="vertical-half-divider"></div>
     <div class="bottom-right">
       <div class="other-details-key">
-        <p>Temp Max</p>
-        <p>Temp Min</p>
-        <p>Pressure</p>
-        <p>Cloud cover</p>
-        <p>Wind speed</p>
+        <p>{{ $t("weatherDetail.tempMax") }}</p>
+        <p>{{ $t("weatherDetail.tempMin") }}</p>
+        <p>{{ $t("weatherDetail.pressure") }}</p>
+        <p>{{ $t("weatherDetail.cloudCover") }}</p>
+        <p>{{ $t("weatherDetail.windSpeed") }}</p>
       </div>
       <div class="other-details-values">
-        <p class="windspeed">{{tempMax}} celsius</p>
-        <p class="humidity">{{tempMin}} celsius</p>
+        <p class="windspeed">{{tempMax}} &deg;C</p>
+        <p class="humidity">{{tempMin}} &deg;C</p>
         <p class="pressure">{{airPressure}} hPa</p>
         <p class="sunrise-time">{{cloudNess}} %</p>
         <p class="windspeed">12 Km/h</p>
@@ -93,19 +93,34 @@ export default {
     tempMax: Number,
     tempMin: Number,
     cloudNess: Number,
+    timeZone: Number,
     weatherDescription: Array,
     weatherForecast: Array
   },
+  computed: {
+    caculateTimeZone() {
+      if(this.timeZone > 0)
+        return "+" + this.timeZone/3600
+      else
+        return this.timeZone/3600
+    },
+    getCurrentDate() {
+      var current = new Date();
+      var futureDate = new Date(current.getTime() - 60*7*60000 + this.timeZone*1000);
+      return futureDate.getDate() + "/" + futureDate.getMonth() + "/" + futureDate.getFullYear();
+    },
+    getTimeZone() {
+      var current = new Date();
+      var futureDate = new Date(current.getTime() - 60*7*60000 + this.timeZone*1000);
+      return futureDate.getHours() + ":" + futureDate.getMinutes() + ":" + futureDate.getSeconds();
+    }
+  },
+  
   data() {
     return {
       currentDate: 'dd/mm/yyy',
-      currentTime: 'hh:mm:ss'
+      timeCaculate: 'hh:mm:ss'
     }
-  },
-  created() {
-    var current = new Date();
-    this.currentDate = current.getDate() + "/" + current.getMonth() + "/" + current.getFullYear();
-    this.currentTime = current.getHours() + ":" + current.getMinutes() + ":" + current.getSeconds();
   }
 
 }

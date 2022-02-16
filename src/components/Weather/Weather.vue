@@ -3,10 +3,10 @@
     <form @submit.prevent="handleSubmit">
       <div class="inputbox">
         <input v-model="$v.nameCity.$model" type="text" required="required"/>
-        <span>Enter a name city</span>
+        <span>{{$t('textBox')}}</span>
       </div>
       <transition name="fade">
-        <div class="error" v-if="!$v.nameCity.minLength">A name city must have at least {{ $v.nameCity.$params.minLength.min }} letters.</div>
+        <div class="error" v-if="!$v.nameCity.minLength">{{ $t("error[0]", {minLength: $v.nameCity.$params.minLength.min}) }}</div>
       </transition>
 
       <div class="inputbox">
@@ -22,13 +22,14 @@
           :temperature="getCurrentState.temperature"
           :airPressure="getCurrentState.airPressure" 
           :tempMax="getCurrentState.tempMax" 
+          :timeZone="getCurrentState.timeZone"
           :tempMin="getCurrentState.tempMin" 
           :cloudNess="getCurrentState.cloudNess"
           :weatherDescription="getCurrentState.weatherDescription" style="margin-top: 35px"/>
       </div>
       <div id="forecastWeather">
         <div v-for="item in getCurrentState.weatherForecast.slice(0,8)" :key="item.index">
-          <Pin2 :timeDT="item.dt" :temperature="item.temp"/>
+          <Pin2 :timeDT="item.dt" :temperature="item.temp" :timeZone="getCurrentState.timeZone"/>
         </div>
       </div>
     </div>

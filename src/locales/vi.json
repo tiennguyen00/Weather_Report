@@ -1,0 +1,22 @@
+{
+  "message": "xin chao TEAM",
+  "nav": {
+    "Title": "Điều hướng",
+    "Home": "Trang chủ",
+    "Weather": "Thời tiết",
+    "Profile": "Trang cá nhân"
+  },
+  "textBox": "Nhập tên thành phố",
+  "textButton": "Lấy dữ liệu",
+  "weatherDetail": {
+    "tempMax": "Nhiệt độ lớn nhất",
+    "tempMin": "Nhiệt độ thấp nhất",
+    "pressure": "Áp suất",
+    "cloudCover": "Mây bao phủ",
+    "windSpeed": "Tốc độ gió",
+    "temperature": "Nhiệt độ"
+  },
+  "error": [
+    "Tên thành phố phải ít nhất %{minLength} ký tự"
+  ]
+}

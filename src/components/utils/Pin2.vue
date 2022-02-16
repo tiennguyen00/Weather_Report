@@ -5,7 +5,7 @@
   <!-- <div class='wave -three'></div> -->
   <div class="weathercon">{{calculatude}}h</div>
   <div class="info">
-    <h2 class="weather_state">TEMPERATURE</h2>
+    <h2 class="weather_state">{{ $t('weatherDetail.temperature') }}</h2>
     <h1 class="temp">{{Math.floor(temperature)}} &deg;C | {{Math.floor(temperature*9/5 + 32)}} &deg;F</h1>
   </div>
 </div>
@@ -14,14 +14,15 @@
 export default {
   props: {
     timeDT: Number,
-    temperature: Number
+    temperature: Number,
+    timeZone: Number
   },
   created() {
   },
   computed: {
     calculatude() {
-      var hours = new Date(this.timeDT*1000);
-      return hours.getHours();
+      var futureDate = new Date(this.timeDT*1000 - 60*7*60000 + this.timeZone*1000);
+      return futureDate.getHours();
     }
   }
 }

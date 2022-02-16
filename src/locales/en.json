@@ -1,0 +1,22 @@
+{
+  "message": "hello TEAM",
+  "nav": {
+    "Title": "Main navigation",
+    "Home": "Home",
+    "Weather": "Weather",
+    "Profile": "Profile"
+  },
+  "textBox": "Enter a name city",
+  "textButton": "Get weather",
+  "weatherDetail": {
+    "tempMax": "Temp Max",
+    "tempMin": "Temp Min",
+    "pressure": "Pressure",
+    "cloudCover": "Cloud cover",
+    "windSpeed": "Wind speed",
+    "temperature": "Temperature"
+  },
+  "error": [
+    "A name city must have at least %{minLength} letters"
+  ]
+}
