@@ -10,7 +10,7 @@
       </transition>
 
       <div class="inputbox">
-        <input :class="{disable: $v.$invalid}" @click="handleSubmit" type="submit" value="Get Weather"/>
+        <input :class="{disable: $v.$invalid}" @click="handleSubmit" type="submit" :value="$t('textButton')"/>
       </div>
     </form>
     <div v-show="getCurrentState.temperature" class="displayResult">

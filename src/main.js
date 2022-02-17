@@ -11,6 +11,12 @@ Vue.use(Vuelidate);
 Vue.use(i18n);
 Vue.component("lottie", Lottie);
 
+router.beforeEach((to, from, next) => {
+  // use the language from the routing param or default language
+  i18n.locale = "en";
+  next();
+});
+
 new Vue({
   store,
   router,
